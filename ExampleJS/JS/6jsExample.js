@@ -89,11 +89,27 @@ const pozitifBolenleri = (sayi) => {
 console.log(pozitifBolenleri(12));
 */
 // 11- Verilen bir stringin içinde belirli bir karakterin kaç kez tekrarlandığını hesaplayan bir fonksiyon yazın.
-
+/*
+const karakterSayisi = (string, karakter) => {
+  let sayac = 0;
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === karakter) {
+      sayac++;
+    }
+  }
+  return sayac;
+};
+console.log(karakterSayisi("hello world", "l"));
+*/
 // BONUS - içerisine kaç adet sayı yazılırsa yazılsın, sayıların toplamını döndüren bir fonksiyon yazınız.
-
-var array = ["Ahmet", "Mehmet", "Caner"];
-const totalArray = array.reduce((total, name) => {
-  return `${total}, ${name}`;
-});
-console.log(totalArray);
+/*
+const topla = (...args) => {
+  let toplam = 0;
+  console.log(args);
+  for (let i = 0; i < args.length; i++) {
+    toplam += args[i];
+  }
+  return toplam;
+};
+console.log(topla(3,5));
+*/
