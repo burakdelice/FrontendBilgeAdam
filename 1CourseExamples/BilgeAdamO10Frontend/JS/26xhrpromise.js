@@ -22,7 +22,7 @@ getData("https://jsonplaceholder.typicode.com/posts")
   .then((response) => {
     console.log(response);
     return getData("https://jsonplaceholder.typicode.com/users");
-    
+  
   })
   .then((response) => {
     console.log(response);
