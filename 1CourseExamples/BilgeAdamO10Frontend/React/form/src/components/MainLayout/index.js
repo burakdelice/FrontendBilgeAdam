@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Layout, Menu, Button, theme } from "antd";
 
 import User from "../../pages/user";
-import Role from "../../pages/role";
+import Permission from "../../pages/permission";
 import Book from "../../pages/book";
+import Todo from "../../pages/Todo";
+import Login from "../../pages/login";
+import UserDetail from "../../pages/user/detail";
+import UseMemoPage from "../../pages/usememo";
+
+import PermissionContext from "../../context/PermissionContext";
 
 import {
   MenuFoldOutlined,
@@ -19,6 +25,7 @@ import "./index.scss";
 const { Header, Sider, Content } = Layout;
 
 const MainLayout = () => {
+  const { permissions } = useContext(PermissionContext);
   const [collapsed, setCollapsed] = useState(false);
 
   const {
@@ -35,20 +42,39 @@ const MainLayout = () => {
             mode="inline"
             defaultSelectedKeys={["1"]}
             items={[
-              {
-                key: "1",
-                icon: <UserOutlined />,
-                label: <Link to="/user">User</Link>,
-              },
+              ...(permissions.some((p) => p === "user.tab.visible")
+                ? [
+                    {
+                      key: "1",
+                      icon: <UserOutlined />,
+                      label: <Link to="/user">User</Link>,
+                    },
+                  ]
+                : []),
               {
                 key: "2",
                 icon: <VideoCameraOutlined />,
-                label: <Link to="/role">Role</Link>,
+                label: <Link to="/permission">Permission</Link>,
               },
               {
                 key: "3",
                 icon: <UploadOutlined />,
                 label: <Link to="/book">Book</Link>,
+              },
+              {
+                key: "4",
+                icon: <UploadOutlined />,
+                label: <Link to="/todo">Todo</Link>,
+              },
+              {
+                key: "5",
+                icon: <UploadOutlined />,
+                label: <Link to="/login">Login</Link>,
+              },
+              {
+                key: "6",
+                icon: <UploadOutlined />,
+                label: <Link to="/useMemo">useMemo</Link>,
               },
             ]}
           />
@@ -60,16 +86,18 @@ const MainLayout = () => {
               background: colorBgContainer,
             }}
           >
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed((prevState) => !prevState)}
-              style={{
-                fontSize: "16px",
-                width: 64,
-                height: 64,
-              }}
-            />
+            {permissions.some((p) => p === "button.collapsed.visible") && (
+              <Button
+                type="text"
+                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                onClick={() => setCollapsed((prevState) => !prevState)}
+                style={{
+                  fontSize: "16px",
+                  width: 64,
+                  height: 64,
+                }}
+              />
+            )}
           </Header>
           <Content
             style={{
@@ -81,9 +109,15 @@ const MainLayout = () => {
           >
             <Routes>
               <Route path="/" element={<User />} exact />
-              <Route path="/user" element={<User />} />
-              <Route path="/role" element={<Role />} />
+              {permissions.some((p) => p === "user.tab.visible") && (
+                <Route path="/user" element={<User />} />
+              )}
+              <Route path="/user/:userid/:username" element={<UserDetail />} />
+              <Route path="/permission" element={<Permission />} />
               <Route path="/book" element={<Book />} />
+              <Route path="/todo" element={<Todo />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/useMemo" element={<UseMemoPage />} />
             </Routes>
           </Content>
         </Layout>
