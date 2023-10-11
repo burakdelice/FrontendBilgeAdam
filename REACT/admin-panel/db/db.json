@@ -1,0 +1,16 @@
+{
+  "user": [
+    {
+      "firstname": "Selahaddin Burak",
+      "lastname": "Delice",
+      "email": "burakdelice.71@gmail.com",
+      "age": 28,
+      "address": "Yeşilköy mahallesi 439.sokak no:7 Bahşılı",
+      "id": 1
+    }
+  ],
+  "role": [],
+  "permission": [],
+  "task": [],
+  "flow": []
+}
