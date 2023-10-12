@@ -24,6 +24,7 @@ const MainLayout = ({ menu, children, onChangeTheme }) => {
     }
     // eslint-disable-next-line
   }, []);
+
   return (
     <Layout
       style={{

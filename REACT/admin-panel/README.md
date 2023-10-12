@@ -16,7 +16,7 @@ You may also see any lint errors in the console.
 
 ### `npx json-server -w db.json -p 4000`
 
-To run json-server.
+To run json-server
 
 ### `npm test`
 
